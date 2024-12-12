@@ -1,5 +1,6 @@
 package web.config;
 
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -16,9 +17,11 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         };
     }
 
+    @NonNull
     @Override
-    protected String[] getServletMappings() {
+    public String[] getServletMappings() {
         return new String[]{"/"};
     }
+
 
 }

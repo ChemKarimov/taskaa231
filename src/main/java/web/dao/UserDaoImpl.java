@@ -2,6 +2,7 @@ package web.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceContextType;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -10,37 +11,31 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
+    @PersistenceContext(type = PersistenceContextType.TRANSACTION)
+    private EntityManager em;
 
     @Override
-    public void save(User user) {
-        entityManager.persist(user);
+    public List<User> getAllUsers() {
+        return em.createQuery("select u from User u").getResultList();
     }
 
     @Override
-    public User getByID(Long id) {
-        return entityManager.find(User.class, id);
+    public void add(User user) {
+        em.persist(user);
     }
 
     @Override
-    public List<User> findAll() {
-        return entityManager.createQuery("FROM User u", User.class).getResultList();
-    }
-
-    @Override
-    public void update(Long id, User user) {
-        User currUser = entityManager.find(User.class, id);
-        currUser.setId(user.getId());
-        currUser.setName(user.getName());
-        currUser.setAge(user.getAge());
-        entityManager.merge(currUser);
+    public void update(User user) {
+        em.merge(user);
     }
 
     @Override
     public void delete(User user) {
-        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
+        em.remove(em.contains(user) ? user : em.merge(user));
     }
 
+    @Override
+    public User getUserById(int id) {
+        return em.find(User.class, (long) id);
+    }
 }
