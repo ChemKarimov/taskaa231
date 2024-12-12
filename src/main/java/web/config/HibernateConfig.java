@@ -22,8 +22,8 @@ public class HibernateConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("");
 
         return dataSource;
     }
@@ -39,7 +39,7 @@ public class HibernateConfig {
 
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
-        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.postgresSQLDialect");
+        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         hibernateProperties.put("hibernate.show_sql", "true");
 
         emFactory.setJpaProperties(hibernateProperties);

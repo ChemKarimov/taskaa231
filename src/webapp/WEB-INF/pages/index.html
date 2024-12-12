@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns="" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -21,8 +21,8 @@
             <td th:utext="${user.lastName}"></td>
             <td th:utext="${user.email}"></td>
             <td>
-                <a th:href="@{/updateInfo(userId= ${user.getId()})}"><input type="button" value="Update" /></a>
-                <a th:href="@{/deleteUser(userId= ${user.getId()})}"><input type="button" value="Delete" /></a>
+                <a th:href="@{/users/updateInfo(userId= ${user.getId()})}"><input type="button" value="Update" /></a>
+                <a th:href="@{/users/deleteUser(userId= ${user.getId()})}"><input type="button" value="Delete" /></a>
             </td>
 
         </tr>

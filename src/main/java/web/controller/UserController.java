@@ -22,32 +22,32 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @GetMapping(value ="/")
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "index";
     }
 
-    @RequestMapping(value ="/addUser", method = RequestMethod.GET)
+    @GetMapping(value ="/addUser")
     public String addUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "user-info";
     }
 
-    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+    @PostMapping(value = "/saveUser")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.add(user);
         return "redirect:/users/";
     }
 
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    @PostMapping(value = "/updateUser")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/users/";
     }
 
-    @RequestMapping(value ="/updateInfo", method = RequestMethod.GET)
+    @GetMapping(value ="/updateInfo")
     public String updateUser(@RequestParam("userId") int id, Model model) {
         model.addAttribute("action", "update");
         User user = userService.getUserById(id);
@@ -55,7 +55,7 @@ public class UserController {
         return "user-info";
     }
 
-    @RequestMapping(value ="/deleteUser", method = RequestMethod.GET)
+    @GetMapping(value ="/deleteUser")
     public String deleteUser(@RequestParam("userId") int id) {
         User user = userService.getUserById(id);
         userService.delete(user);
